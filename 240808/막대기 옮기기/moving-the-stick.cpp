@@ -2,7 +2,7 @@
 using namespace std;
 
 int main() {
-	const int MAXN = 6; 
+	const int MAXN = 16; 
 	int n; 
 	cin >> n;
 	int stage[MAXN + 1][MAXN + 1] = { 0 }; 
