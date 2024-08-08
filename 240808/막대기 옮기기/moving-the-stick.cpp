@@ -16,8 +16,7 @@ int main() {
 	long long dp[MAXN + 1][MAXN + 1][STATE] = {0};
 	dp[1][2][0] = 1;
 	for (int row = 1; row <= n; row++) {
-		for (int col = 1; col <= n; col++) {
-			dp[1][2][0] = 1; 
+		for (int col = 2; col <= n; col++) {
 			if (stage[row][col] != 0)continue; 
 			dp[row][col][0] = dp[row][col - 1][0] + dp[row][col - 1][2]; 
 			dp[row][col][1] = dp[row-1][col - 1][0] + dp[row-1][col - 1][1] + dp[row - 1][col - 1][2];
