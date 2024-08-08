@@ -14,6 +14,7 @@ struct Node {
 bool cmp(const Node& left, const Node& right) {
 	return left.delayTime > right.delayTime; 
 }
+
 int main() {
 	int n, p, d; 
 	cin >> n; 
@@ -30,7 +31,7 @@ int main() {
 	int index = 0; 
 	long long result = 0; 
 	for (int limitTime = arr[0].delayTime; limitTime >= 1; limitTime--) {
-		while (index < arr.size() && limitTime <= arr[index].delayTime) {
+		while (index < arr.size() && limitTime == arr[index].delayTime) {
 			pq.push(arr[index]); 
 			index++; 
 		}
