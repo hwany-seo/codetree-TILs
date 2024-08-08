@@ -14,7 +14,7 @@ int main() {
 
 	const int STATE = 3; // 0 : 가로 , 1 : 세로 , 2 : 대각 
 	long long dp[MAXN + 1][MAXN + 1][STATE] = {0};
-	dp[2][1][0] = 1;
+	dp[2][1][1] = 1;
 	for (int row = 2; row <= n; row++) {
 		for (int col = 1; col <= n; col++) {
 			if (row == 2 && col == 1)continue; 
