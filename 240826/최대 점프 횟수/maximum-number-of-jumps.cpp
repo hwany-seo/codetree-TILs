@@ -13,19 +13,20 @@ void init() {
 	}
 }
 
+const int UNINITIALIZED = -1;
 int memo[MAXN]; 
 void initMemo() {
 	for (int i = 0; i < N; i++) {
-		memo[i] = -1;
+		memo[i] = UNINITIALIZED;
 	}
 	memo[0] = 0; 
 }
 int MaxJumpCount(int index) {
-	if (memo[index] != -1)return memo[index]; 
+	if (memo[index] != UNINITIALIZED)return memo[index]; 
 	int result = -1; 
 	for (int i = 0; i < index; i++) {
-		if (stages[i] + i < index)continue; 
-		result = std::max(MaxJumpCount(i) +1, result);
+		if (stages[i] + i < index)continue;
+		result = std::max(MaxJumpCount(i) + 1, result);
 	}
 
 	return memo[index] = result; 
