@@ -18,12 +18,12 @@ void init() {
 	for (int i = 0; i < N; ++i) {
 		std::cin >> coins[i];
 	}
-	for (int i = 0; i <= 10000; i++) {
+	/*for (int i = 0; i <= 10000; i++) {
 		memo[i] = 1e9;
 	}
 	for (int i = 0; i < N; ++i) {
 		memo[coins[i]] = 1; 
-	}
+	}*/
 }
 
 /*
@@ -55,17 +55,20 @@ int main() {
 	
 	int dp[10001] = { 0 }; 
 	for (int i = 0; i < 10001; ++i) {
-		dp[i] = -1; 
+		dp[i] = 1e9; 
 	}
 	for (int i = 0; i < N; ++i) {
 		dp[coins[i]] = 1;
 	}
+
 	for (int m = 0; m <= money; ++m) {
+		dp[m] = 1e9; 
 		for (int i = 0; i < N; ++i) {
 			if (m - coins[i] < 0) continue; 
-			if (dp[m - coins[i]] == -1)continue; 
+			if (dp[m - coins[i]] == 1e9)continue; 
 			dp[m] = std::min(dp[m - coins[i]] + 1, dp[m]); 
 		}
 	}
-	std::cout << dp[money]; 
+	if (dp[money] == 1e9) std::cout << -1; 
+	else std::cout << dp[money]; 
 }
