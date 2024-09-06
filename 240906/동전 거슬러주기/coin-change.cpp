@@ -11,6 +11,7 @@ int money;
 std::vector<int> coins;
 int memo[10001];
 void init() {
+	//freopen_s(new FILE*, "Text.txt", "r", stdin); 
 	std::cin >> N;
 	std::cin >> money;
 	coins = std::vector<int>(N);
@@ -20,6 +21,10 @@ void init() {
 	for (int i = 0; i <= 10000; i++) {
 		memo[i] = 1e9;
 	}
+	for (int i = 0; i < N; ++i) {
+		memo[coins[i]] = 1; 
+	}
+	memo[0] = 0; 
 }
 
 /*
@@ -33,15 +38,16 @@ void init() {
 
 int MinCoinCount(int m) {
 	if (memo[m] != 1e9) return memo[m];
-	if (m == 0) return 0;
-	if (m < 0) return 1e9; 
+	if (m < 0) return -1; 
 
 	int result = 1e9;
 	for (int i = 0; i < N; ++i) {
-		result = std::min(MinCoinCount(m - coins[i]), result);
+		int ret = MinCoinCount(m - coins[i]); 
+		if (ret == -1)continue; 
+		result = std::min(ret, result);
 	}
 
-	if (result == 1e9) return result;
+	if (result == 1e9) return memo[m] = -1; // 불가능 
 	return memo[m] = result + 1;
 }
 int main() {
@@ -52,7 +58,6 @@ int main() {
 	}
 	else {
 		std::cout << ret;
-
 	}
 
 }
