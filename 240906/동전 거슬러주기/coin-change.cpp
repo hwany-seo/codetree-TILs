@@ -33,8 +33,7 @@ void init() {
 
 int MinCoinCount(int m) {
 	if (memo[m] != 1e9) return memo[m]; 
-	if (m < 0) return 1e9; 
-	if (m == 0) return 0; 
+	if (m <= 0) return 1e9; 
 
 	int result = 1e9; 
 	for (int i = 0; i < N; ++i) {
@@ -46,6 +45,13 @@ int MinCoinCount(int m) {
 }
 int main() {
 	init(); 
-	std::cout << MinCoinCount(money); 
+	int ret = MinCoinCount(money); 
+    if(ret == 1e9) { 
+        std::cout << "불가능" ; 
+    }
+    else { 
+        std::cout << ret ; 
+
+    }
 
 }
