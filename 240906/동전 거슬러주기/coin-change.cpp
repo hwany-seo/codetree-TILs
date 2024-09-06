@@ -11,7 +11,7 @@ int money;
 std::vector<int> coins;
 int memo[10001];
 void init() {
-	freopen_s(new FILE*, "Text.txt", "r", stdin); 
+	//freopen_s(new FILE*, "Text.txt", "r", stdin); 
 	std::cin >> N;
 	std::cin >> money;
 	coins = std::vector<int>(N);
