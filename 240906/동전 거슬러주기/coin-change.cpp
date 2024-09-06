@@ -24,7 +24,6 @@ void init() {
 	for (int i = 0; i < N; ++i) {
 		memo[coins[i]] = 1; 
 	}
-	memo[0] = 0; 
 }
 
 /*
@@ -38,7 +37,7 @@ void init() {
 
 int MinCoinCount(int m) {
 	if (memo[m] != 1e9) return memo[m];
-	if (m < 0) return -1; 
+	if (m <= 0) return -1; 
 
 	int result = 1e9;
 	for (int i = 0; i < N; ++i) {
@@ -52,12 +51,21 @@ int MinCoinCount(int m) {
 }
 int main() {
 	init();
-	int ret = MinCoinCount(money);
-	if (ret == 1e9) {
-		std::cout << -1;
+	//std::cout << MinCoinCount(money);
+	
+	int dp[10001] = { 0 }; 
+	for (int i = 0; i < 10001; ++i) {
+		dp[i] = 1e9; 
 	}
-	else {
-		std::cout << ret;
+	for (int i = 0; i < N; ++i) {
+		dp[coins[i]] = 1;
 	}
-
+	for (int m = 0; m <= money; ++m) {
+		for (int i = 0; i < N; ++i) {
+			if (m - coins[i] < 0) continue; 
+			if (dp[m - coins[i]] == 1e9)continue; 
+			dp[m] = std::min(dp[m - coins[i]] + 1, dp[m]); 
+		}
+	}
+	std::cout << dp[money]; 
 }
