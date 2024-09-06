@@ -11,7 +11,7 @@ int money;
 std::vector<int> coins;
 int memo[10001];
 void init() {
-	//freopen_s(new FILE*, "Text.txt", "r", stdin); 
+	freopen_s(new FILE*, "Text.txt", "r", stdin); 
 	std::cin >> N;
 	std::cin >> money;
 	coins = std::vector<int>(N);
@@ -55,7 +55,7 @@ int main() {
 	
 	int dp[10001] = { 0 }; 
 	for (int i = 0; i < 10001; ++i) {
-		dp[i] = 1e9; 
+		dp[i] = -1; 
 	}
 	for (int i = 0; i < N; ++i) {
 		dp[coins[i]] = 1;
@@ -63,7 +63,7 @@ int main() {
 	for (int m = 0; m <= money; ++m) {
 		for (int i = 0; i < N; ++i) {
 			if (m - coins[i] < 0) continue; 
-			if (dp[m - coins[i]] == 1e9)continue; 
+			if (dp[m - coins[i]] == -1)continue; 
 			dp[m] = std::min(dp[m - coins[i]] + 1, dp[m]); 
 		}
 	}
