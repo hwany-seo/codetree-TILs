@@ -26,11 +26,13 @@ int main() {
 	for (int num = 1; num <= N; ++num) {
 		dp[num]; 
 		if (num - 1 < 1) continue; 
-		dp[num] += dp[num - 1]; 
+		dp[num] += dp[num - 1] % 10007;
 		if (num - 2 < 1) continue; 
-		dp[num] += dp[num - 2]; 
+		dp[num] += dp[num - 2] % 10007;
 		if (num - 5 < 1) continue; 
-		dp[num] += dp[num - 5]; 
+		dp[num] += dp[num - 5] % 10007;
+
+		dp[num] %= 10007; 
 	}
 
 	cout << dp[N]; 
