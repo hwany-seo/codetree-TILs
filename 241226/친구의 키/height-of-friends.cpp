@@ -1,49 +1,48 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
-#include <queue>
+#include <stack>
 
-using namespace std; 
+using namespace std;
 
-int n, m; 
+int n, m;
 //vector<pair<int, int>> given_edges; 
-vector<int> edges[100'001]; 
-int indegree[100'001]; 
-
+vector<int> edges[100'001];
+bool isNoRoot[100'001];
 void initTopologicalSort() {
-	cin >> n >> m; 
+	cin >> n >> m;
 	for (int i = 0; i < m; ++i) {
-		int a, b; 
-		cin >> a >> b; 
-		edges[a].push_back(b); 
-		indegree[b]++; 
+		int a, b;
+		cin >> a >> b;
+		edges[a].push_back(b);
+		isNoRoot[b] = true;
 	}
 }
+
+stack<int> results;
+bool visited[100'001];
+void dfs(int now) {
+	for (int next : edges[now]) {
+		if (visited[next])continue;
+		visited[next] = true;
+		dfs(next);
+	}
+
+	results.push(now);
+}
 int main() {
-	initTopologicalSort(); 
-	queue<int> qu; 
+	initTopologicalSort();
 
+	// dfs
 	for (int node = 1; node <= n; node++) {
-		if (indegree[node] == 0)
-			qu.push(node); 
+		if (isNoRoot[node])continue;
+		visited[node] = true;
+		dfs(node);
 	}
 
-	vector<int> results; 
-	while (!qu.empty()) {
-		int now = qu.front();  
-		qu.pop(); 
-		results.push_back(now); 
-		
-		for (int next : edges[now]) {
-			indegree[next]--; 
-			if (indegree[next] == 0) {
-				qu.push(next); 
-			}
-		}
-	}
-
-	for (int node : results) {
-		cout << node << " "; 
+	while (!results.empty()) {
+		cout << results.top() << " ";
+		results.pop(); 
 	}
 	return 0;
 
