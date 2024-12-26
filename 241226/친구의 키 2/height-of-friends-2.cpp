@@ -26,7 +26,6 @@ int main() {
     int cnt = 0; 
 	for (int node = 1; node <= n; node++) {
 		if (indegree[node] == 0) {
-            cnt ++; 
 			q.push(node);
 		}
 	}
