@@ -23,21 +23,19 @@ int main() {
 
 	queue<int> q;
 
-	bool visited[100001] = { 0 };
 	for (int node = 1; node <= n; node++) {
 		if (indegree[node] == 0) {
-			visited[node] = true;
+            cnt ++; 
 			q.push(node);
 		}
 	}
 
-	vector<int> results;
+    int cnt = 0; 
 	while (!q.empty()) {
 		int now = q.front();
 		q.pop();
-		results.push_back(now);
+        cnt ++ ; 
 		for (int next : edges[now]) {
-			if (visited[next])continue; 
 			indegree[next]--;
 			if (indegree[next] == 0) {
 				q.push(next);
@@ -46,7 +44,7 @@ int main() {
 	}
 
 	// indegree가 
-	if (results.size() != n) {
+	if (n != cnt) {
 		cout << "Inconsistent";
 	}
 	else {
