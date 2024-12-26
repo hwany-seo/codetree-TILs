@@ -23,6 +23,7 @@ int main() {
 
 	queue<int> q;
 
+    int cnt = 0; 
 	for (int node = 1; node <= n; node++) {
 		if (indegree[node] == 0) {
             cnt ++; 
@@ -30,7 +31,6 @@ int main() {
 		}
 	}
 
-    int cnt = 0; 
 	while (!q.empty()) {
 		int now = q.front();
 		q.pop();
