@@ -51,7 +51,7 @@ int main() {
 
     for(int row = 0; row < n; row ++) { 
         for(int col = 0; col < m; col ++){ 
-            if(row + 1 >= n || col + 1 >= n)continue; 
+            if(row + 1 >= n || col + 1 >= m)continue; 
             result = max(result, FirstBlockCount(row, col));       
         }
     }
