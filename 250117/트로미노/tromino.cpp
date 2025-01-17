@@ -5,37 +5,80 @@ using namespace std;
 int n, m;
 int grid[200][200];
 
-int FirstBlockCount(int row, int col) { 
-    int sum = 0 ; 
-    for(int r = 0 ; r < 2; r ++) { 
-        for(int c = 0 ; c < 2; c ++) { 
-            sum += grid[row + r][col + c]; 
+
+int firstblocks[4][2][2] = { 
+    {
+     1,0,
+     1,1
+    },
+    {
+     1,1,
+     1,0
+    },
+    {
+     1,1,
+     0,1
+    },
+    {
+     0,1,
+     1,1
+    },
+};
+
+int secondblocks[4][3][3] = { 
+    {
+        1,1,1,
+        0,0,0,
+        0,0,0
+    },
+    {
+        0,0,1,
+        0,0,1,
+        0,0,1
+    },
+    {
+        0,0,0,
+        0,0,0,
+        1,1,1
+    },
+    {
+        1,0,0,
+        1,0,0,
+        1,0,0
+    },
+}; 
+
+
+int MaxMaskingFirst(int row, int col) { 
+    int answer = 0; 
+    for(int i = 0 ;i < 4; i ++) { 
+        int result = 0; 
+        for(int r = 0 ; r < 2; r ++) { 
+            for(int c = 0 ;c  < 2; c ++) { 
+                if(firstblocks[i][r][c] == 1){ 
+                    result += grid[row + r][col + c]; 
+                }
+            }
         }
+        answer = max(result, answer); 
     }
-    
-    int result = 0; 
-    result = max(result, sum - grid[row][col]); 
-    result = max(result, sum - grid[row+1][col]); 
-    result = max(result, sum - grid[row][col+1]); 
-    result = max(result, sum - grid[row+1][col+1]); 
-    return result; 
+    return answer; 
 }
 
-int SecondBlockGaroCount(int row , int col) { 
-    int garoSum = 0; 
-    for(int c = 0 ; c < 3; c ++) { 
-        garoSum += grid[row][col + c]; 
+int MaxMaskingSecond(int row, int col) { 
+    int answer = 0 ;
+    for(int i = 0 ; i < 4; i ++){ 
+        int result =0 ; 
+        for(int r = 0 ; r < 3; r ++) { 
+            for(int c =0 ; c < 3; c ++) { 
+                if(secondblocks[i][r][c] == 1) { 
+                    result += grid[row + r][col + c]; 
+                }
+            }
+        }
+        answer = max(result, answer); 
     }
-
-    return garoSum; 
-}
-
-int SecondBlockSeroCount(int row, int col){ 
-    int seroSum = 0;
-    for(int r = 0; r < 3; r ++) { 
-        seroSum += grid[row + r][col]; 
-    } 
-    return seroSum;
+    return answer; 
 }
 int main() {
     cin >> n >> m;
@@ -50,24 +93,13 @@ int main() {
     int result = 0; 
 
     for(int row = 0; row < n; row ++) { 
-        for(int col = 0; col < m; col ++){ 
-            if(row + 1 >= n || col + 1 >= m)continue; 
-            result = max(result, FirstBlockCount(row, col));       
-        }
-    }
-
-    for(int row = 0; row < n; row ++) { 
-        for(int col = 0; col < m; col ++){ 
-            if(row + 2 >= n)continue; 
-            result = max(result, SecondBlockSeroCount(row, col));       
-        }
-    }
-
-    
-    for(int row = 0; row < n; row ++) { 
-        for(int col = 0; col < m; col ++){ 
-            if(col + 2 >= m)continue; 
-            result = max(result, SecondBlockGaroCount(row, col));       
+        for(int col = 0; col < m; col ++) { 
+            if(row + 1 < n && col + 1 < m){ 
+                result = max(result, MaxMaskingFirst(row,col)); 
+            }
+            if(row + 2 < n && col + 2 < m){ 
+                result = max(result, MaxMaskingSecond(row,col)); 
+            }
         }
     }
 
