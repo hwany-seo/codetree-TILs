@@ -23,7 +23,7 @@ int main() {
             int sum = 0 ;  
             for(int y = 0 ;y < 3; y ++ ){ 
                 for(int x =0 ; x < 3; x ++) { 
-                    sum += grid[row + y][row + x]; 
+                    sum += grid[row + y][col + x]; 
                 }
             }
             result = max(result, sum); 
