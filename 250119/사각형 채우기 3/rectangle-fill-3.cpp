@@ -8,19 +8,19 @@ int n;
 // dp[n] = dp[n-1] * 2 + dp[n - 2] * 3 + 2; 
 int main() {
     cin >> n;
-    long long dp[1001] = { 0 } ; 
+    long long dp[1001] = { 0 };
     dp[0] = 1;
-    dp[1] = 2; 
-    dp[2] = 7; 
+    dp[1] = 2;
+    dp[2] = 7;
 
     const long long DIV = 1'000'000'007;
-    for(int i = 3; i <= n; i ++) { 
-        dp[i] = (dp[i-1] * 2 % DIV+ dp[i-2] * 3 % DIV) % DIV;
+    for (int i = 3; i <= n; i++) {
+        dp[i] = (dp[i - 1] * 2 % DIV + dp[i - 2] * 3 % DIV) % DIV;
 
-        for(int t = i-3; t >= 0; t --) { 
-            dp[i] += 2; 
-            dp[i] %= DIV; 
-        } 
+        for (int t = i - 3; t >= 0; t--) {
+            dp[i] += dp[t] * 2;
+            dp[i] %= DIV;
+        }
     }
 
     cout << dp[n];
