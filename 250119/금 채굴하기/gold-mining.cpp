@@ -60,13 +60,10 @@ int main() {
 
     int maxGold = 0;
     // Write your code here!
-    for (int k = 0; k < n; k++) {
+    for (int k = 0; k <= 2 * n + 1; k++) {
         int drillCost = k * k + (k + 1) * (k + 1);
         for (int row = 0; row < n; row++) {
             for (int col = 0; col < n; col++) {
-                if (row == 1 && col == 1 && k == 1) {
-                    int de = -1;
-                }
                 int goldCnt = countGold(row, col, k);
                 int goldCost = m * goldCnt;
                 if (goldCost - drillCost >= 0) {
