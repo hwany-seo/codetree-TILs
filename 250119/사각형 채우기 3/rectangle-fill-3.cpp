@@ -15,7 +15,14 @@ int main() {
 
     const long long DIV = 1'000'000'007;
     for(int i = 3; i <= n; i ++) { 
-        dp[i] = (dp[i-1] * 2 % DIV+ dp[i-2] * 3 % DIV + 2) % DIV;
+        dp[i] = (dp[i-1] * 2 % DIV+ dp[i-2] * 3 % DIV) % DIV;
+        if(i % 2 == 0){ 
+            dp[i] += 4; 
+        }
+        else { 
+            dp[i] += 2; 
+        }
+        dp[i] %= DIV; 
     }
 
     cout << dp[n];
