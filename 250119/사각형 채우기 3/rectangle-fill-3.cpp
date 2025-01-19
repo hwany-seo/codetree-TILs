@@ -22,6 +22,8 @@ int main() {
         else { 
             dp[i] += dp[i-4] * 2 % DIV; 
         }
+
+        dp[i] %= DIV; 
         
     } 
 
