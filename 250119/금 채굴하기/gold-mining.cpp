@@ -63,7 +63,7 @@ int main() {
             for (int col = 0; col < n; col++) {
                 int goldCnt = countGold(row, col, k);
                 int goldCost = m * goldCnt;
-                if (goldCost - drillCost > 0) {
+                if (goldCost - drillCost >= 0) {
                     maxGold = max(goldCnt, maxGold);
                 }
             }
