@@ -13,36 +13,39 @@ bool isPossible(int row, int col) {
 bool isGold(int row, int col) {
     return grid[row][col] == 1;
 }
+
+int countLineGold(int row, int col, int cnt) {
+    int result = 0;
+    if(isPossible(row,col))
+        result += grid[row][col]; 
+    for (int i = 1; i <= cnt / 2; i++) {
+        if (!isPossible(row, col - i))
+            continue; 
+        result += grid[row][col-i]; 
+    }
+    for (int i = 1; i <= cnt / 2; i++) {
+        if (!isPossible(row, col + i))
+            continue;
+        result += grid[row][col + i];
+    }
+    return result; 
+}
 int countGold(int row, int col, int k) {
-    if (k == 0) {
-        int cnt = isGold(row, col) ? 1 : 0;
-        return cnt;
+    int result = 0; 
+    int cnt = 1; 
+    for (int r = row - k; r < row ; r++) {
+        result += countLineGold(r, col, cnt);
+        cnt += 2; 
     }
-    int sRow = row - k + 1;
-    int sCol = col - k + 1;
-    int cnt = 0;
-    for (int r = 0; r < 2 * k - 1; r++) {
-        for (int c = 0; c < 2 * k - 1; c++) {
-            int nr = sRow + r;
-            int nc = sCol + c;
-            if (!isPossible(nr, nc))continue;
-            if (!isGold(nr, nc))continue;
-            cnt += grid[nr][nc];
-        }
+   
+    result += countLineGold(row, col, cnt); 
+    cnt -= 2; 
+
+    for (int r = row + 1; r <= row + k; r++) {
+        result += countLineGold(r, col, cnt); 
+        cnt -= 2; 
     }
-
-    int dr[] = { -1,1,0,0 };
-    int dc[] = { 0,0,-1,1 };
-    for (int t = 0; t < 4; t++) {
-        int nr = dr[t] * k + row;
-        int nc = dc[t] * k + col;
-        if (!isPossible(nr, nc)) continue;
-        if (!isGold(nr, nc)) continue;
-
-        cnt += grid[nr][nc];
-
-    }
-    return cnt; 
+    return result; 
 }
 int main() {
     cin >> n >> m;
@@ -61,6 +64,9 @@ int main() {
         int drillCost = k * k + (k + 1) * (k + 1);
         for (int row = 0; row < n; row++) {
             for (int col = 0; col < n; col++) {
+                if (row == 1 && col == 1 && k == 1) {
+                    int de = -1;
+                }
                 int goldCnt = countGold(row, col, k);
                 int goldCost = m * goldCnt;
                 if (goldCost - drillCost >= 0) {
