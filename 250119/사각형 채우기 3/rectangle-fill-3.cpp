@@ -13,20 +13,11 @@ int main() {
     dp[1] = 2; 
     dp[2] = 7; 
 
-    const long long DIV = 1000000007;
+    const long long DIV = 1'000'000'007;
     for(int i = 3; i <= n; i ++) { 
-        dp[i] = (dp[i-1] * 2 % DIV+ dp[i-2] * 3 % DIV) % DIV;
-        if(i % 2 == 1) { 
-            dp[i] += dp[i-3] * 2 % DIV; 
-        }
-        else { 
-            dp[i] += dp[i-4] * 2 % DIV; 
-        }
-
-        dp[i] %= DIV; 
-        
-    } 
-
+        dp[i] = (dp[i-1] * 2 % DIV+ dp[i-2] * 3 % DIV + 2) % DIV;
+    }
+    
     cout << dp[n];
 
     return 0;
