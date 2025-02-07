@@ -149,20 +149,5 @@ void countGlaciers() {
 }
 
 int main() {
-    cin >> n >> q;
-    n = power(n);
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            cin >> arr[i][j];
-        }
-    }
-    int de = 1;
-    for (int i = 0; i < q; i++) {
-        int lev;
-        cin >> lev;
-        process(power(lev), n);
-        melt();
-        int de = 1;
-    }
-    countGlaciers();
+    int de = -1; 
 }
