@@ -1,4 +1,5 @@
 #include <iostream>
+#include <unordered_set>
 
 using namespace std;
 
@@ -17,7 +18,17 @@ int main() {
         cin >> arr2[i];
     }
 
-    // Write your code here!
-
+    unordered_set<int> s; 
+    for(int i = 0 ; i < n; i ++) { 
+        s.insert(arr1[i]); 
+    }    
+    for(int i = 0 ; i < m; i ++) { 
+        if(s.find(arr2[i]) != s.end()){ 
+            cout << 1 << " " ; 
+        }
+        else { 
+            cout << 0 << " " ;
+        }
+    }
     return 0;
 }
