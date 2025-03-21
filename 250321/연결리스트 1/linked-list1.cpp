@@ -19,15 +19,17 @@ struct Node {
 
 Node* cur;
 void createNodeAndinsertToCurNext(string value) {
-    // cur-> new 
+    // cur<-> new <-> next
     Node* ptr = new Node{ value ,nullptr, nullptr }; 
+    cur->next->prev = ptr; 
     ptr->prev = cur; 
     ptr->next = cur->next; 
     cur->next = ptr; 
 }
 void createNodeAndinsertToCurPrev(string value) {
-    // new -> cur
+    // prev-> new -> cur
     Node* ptr = new Node{ value, nullptr, nullptr };
+    cur->prev->next = ptr; 
     ptr->next = cur;
     ptr->prev = cur->prev; 
     cur->prev = ptr; 
@@ -86,6 +88,9 @@ int main() {
             if (cur->next != nullptr) {
                 cur = cur->next; 
             }
+        }
+        if (cur->value == "pineapp") {
+            int de = -1;
         }
 
         printCurInfo(); 
