@@ -21,7 +21,7 @@ Node* cur;
 void createNodeAndinsertToCurNext(string value) {
     // cur<-> new <-> next
     Node* ptr = new Node{ value ,nullptr, nullptr }; 
-    cur->next->prev = ptr; 
+    if(cur->next != nullptr) cur->next->prev = ptr; 
     ptr->prev = cur; 
     ptr->next = cur->next; 
     cur->next = ptr; 
@@ -29,7 +29,7 @@ void createNodeAndinsertToCurNext(string value) {
 void createNodeAndinsertToCurPrev(string value) {
     // prev-> new -> cur
     Node* ptr = new Node{ value, nullptr, nullptr };
-    cur->prev->next = ptr; 
+    if(cur->prev != nullptr) cur->prev->next = ptr; 
     ptr->next = cur;
     ptr->prev = cur->prev; 
     cur->prev = ptr; 
@@ -89,10 +89,6 @@ int main() {
                 cur = cur->next; 
             }
         }
-        if (cur->value == "pineapp") {
-            int de = -1;
-        }
-
         printCurInfo(); 
     }
     return 0;
