@@ -81,7 +81,6 @@ int main() {
             if (cur->prev != nullptr) {
                 cur = cur->prev; 
             }
-            
         }
         if (cmd == 4) {
             if (cur->next != nullptr) {
